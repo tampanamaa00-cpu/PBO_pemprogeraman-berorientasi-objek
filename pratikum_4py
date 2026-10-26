@@ -1,0 +1,55 @@
+class Hero:
+    # class variabel
+    jumlah = 0
+
+    def __init__(self, inputName, inputHealth, inputPower, inputArmor):
+        # instance variabel
+        self.name = inputName
+        self.health = inputHealth
+        self.power = inputPower
+        self.armor = inputArmor
+        Hero.jumlah += 1
+
+    # Method tanpa param, dengan return
+    def siapa(self):
+        return f"{self.name} memiliki power {self.power}"
+
+    # Method dengan param, tanpa return
+    def healthUp(self, up):
+        self.health += up
+
+    # Method tanpa param, dengan return
+    def gethealth(self):
+        return self.health
+
+    # Method tanpa param, tanpa return
+    def info(self):
+        print(f"Hero: {self.name} | Health: {self.health} | Power: {self.power} | Armor: {self.armor}")
+
+    # BARU: method dengan param dan return
+    def serang(self, musuh):
+        damage = max(self.power - musuh.armor, 0)
+        musuh.health -= damage
+        return damage
+
+    # BARU: method dengan param dan return
+    def hitungPowerBonus(self, bonus):
+        return self.power + bonus
+
+
+hero1 = Hero("Sniper", 100, 10, 5)
+hero2 = Hero("Axe", 200, 15, 0)
+
+print(hero1.siapa())                      # diperbaiki: sebelumnya hero1.print(...)
+hero1.armor = 10
+print(f"Armor {hero1.name} = {hero1.armor}")
+print(f"Jumlah hero = {Hero.jumlah}")
+hero1.healthUp(20)
+print(f"Health {hero1.name} = {hero1.gethealth()}")
+print(f"Health {hero2.name} = {hero2.gethealth()}")
+
+hero1.info()
+damage = hero1.serang(hero2)
+print(f"{hero1.name} menyerang {hero2.name}, damage = {damage}")
+print(f"Health {hero2.name} sekarang = {hero2.gethealth()}")
+print(f"Power {hero1.name} + bonus 5 = {hero1.hitungPowerBonus(5)}")
